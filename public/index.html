@@ -143,7 +143,7 @@
             "Discover how citrus compounds are being studied for wellness support"
         </p>
         
-        <button id="research-access-btn" onclick="trackAndRedirect()"
+        <button id="research-access-btn" onclick="trackAndRedirect()" onclick="trackAndRedirect()"
                 style="background: linear-gradient(135deg, #4CAF50, #2E7D32); 
                        color: white; 
                        padding: 18px 50px; 
@@ -229,7 +229,7 @@
         </p>
     </footer>
 
-    <!-- ========== FIXED PIXEL TRACKING SCRIPT ========== -->
+        <!-- ========== FIXED PIXEL TRACKING SCRIPT ========== -->
     <script>
     function trackAndRedirect() {
         // Multiple tracking methods for redundancy
@@ -271,51 +271,10 @@
             console.error('❌ Facebook Pixel not loaded!');
         }
         
-        // Method 2: Direct API call as backup
-        try {
-            fetch('https://graph.facebook.com/v18.0/1881631042720883/events', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    data: [{
-                        event_name: 'AddToCart',
-                        event_time: Math.floor(Date.now() / 1000),
-                        action_source: 'website',
-                        event_source_url: window.location.href,
-                        user_data: {
-                            client_user_agent: navigator.userAgent
-                        },
-                        custom_data: {
-                            value: 0.00,
-                            currency: 'USD',
-                            content_ids: ['zyntis_main'],
-                            content_type: 'product'
-                        }
-                    }]
-                })
-            }).then(response => {
-                console.log('Direct API response:', response.ok ? 'Success' : 'Failed');
-            }).catch(e => console.log('Direct API fallback error:', e));
-        } catch (e) {
-            console.log('Direct API not available:', e);
-        }
-        
-        // Method 3: Google Analytics if available
-        if(typeof gtag !== 'undefined') {
-            gtag('event', 'add_to_cart', {
-                'items': [{
-                    'id': 'zyntis_main',
-                    'name': 'Zyntis Educational Resource',
-                    'category': 'Education'
-                }]
-            });
-        }
-        
-        // REDIRECT with tracking delay
+        // Wait 500ms for tracking to complete, then redirect WITHOUT Pixel
         setTimeout(function() {
-            window.location.href = 'https://67c68r2g1f1mfxaznq3etywfv1.hop.clickbank.net?tid=zyntis_fb_main';
+            // CLEAN URL - no ClickBank tracking to avoid duplicate pixels
+            window.location.href = 'https://citrusburn.com/?hopId=538904b4-cf61-47cd-934e-c708c9849382';
         }, 500);
     }
 
@@ -329,10 +288,28 @@
         }
     });
     
-    // Debug helper
+    // Debug helper - check for duplicate pixels
     console.log('Tracking script loaded successfully');
     console.log('Pixel status:', typeof fbq !== 'undefined' ? '✅ Loaded' : '❌ Not loaded');
+    
+    // Check for duplicate pixels
+    setTimeout(function() {
+        if (typeof fbq !== 'undefined') {
+            var pixels = [];
+            var scripts = document.getElementsByTagName('script');
+            for (var i = 0; i < scripts.length; i++) {
+                if (scripts[i].src && scripts[i].src.includes('fbevents.js')) {
+                    pixels.push(scripts[i].src);
+                }
+            }
+            if (pixels.length > 1) {
+                console.warn('⚠️ Multiple Facebook Pixels detected:', pixels.length);
+            }
+        }
+    }, 1000);
     </script>
 
 </body>
 </html>
+
+
