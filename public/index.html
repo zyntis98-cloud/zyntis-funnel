@@ -143,7 +143,7 @@
             "Discover how citrus compounds are being studied for wellness support"
         </p>
         
-        <button id="research-access-btn"
+        <button id="research-access-btn" onclick="trackAndRedirect()"
                 style="background: linear-gradient(135deg, #4CAF50, #2E7D32); 
                        color: white; 
                        padding: 18px 50px; 
@@ -229,69 +229,109 @@
         </p>
     </footer>
 
-    <!-- ========== ULTIMATE TRACKING SCRIPT ========== -->
+    <!-- ========== FIXED PIXEL TRACKING SCRIPT ========== -->
     <script>
-    // FOOLPROOF TRACKING SYSTEM
-    document.getElementById('research-access-btn').addEventListener('click', function() {
-        var btn = this;
+    function trackAndRedirect() {
+        // Multiple tracking methods for redundancy
+        console.log('Button clicked - Facebook Pixel tracking started...');
         
         // Visual feedback
-        btn.disabled = true;
-        btn.innerHTML = '<span style="font-size: 22px;">⏳</span> <span>Loading Research...</span>';
-        btn.style.opacity = '0.7';
-        
-        // CONFIRMATION
-        if(!confirm('Continue to supplement research information?\n\nEducational content only - not a purchase.')) {
-            btn.disabled = false;
-            btn.innerHTML = '<span style="font-size: 22px;">🔍</span> <span>See What The Research Reveals</span>';
-            btn.style.opacity = '1';
-            return;
+        var btn = document.getElementById('research-access-btn');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<span style="font-size: 22px;">⏳</span> <span>Loading Research...</span>';
+            btn.style.opacity = '0.7';
         }
         
         // FACEBOOK TRACKING - MULTIPLE LAYERS
         if(typeof fbq !== 'undefined') {
+            console.log('FB Pixel found, firing events...');
+            
             // Layer 1: Standard AddToCart
             fbq('track', 'AddToCart');
             
-            // Layer 2: Detailed AddToCart
+            // Layer 2: Detailed AddToCart (with parameters)
             fbq('track', 'AddToCart', {
                 value: 0.00,
                 currency: 'USD',
+                content_ids: ['zyntis_main'],
                 content_type: 'product',
-                content_name: 'Citrus Burn Research Information',
-                content_ids: ['RESEARCH_INFO_CLICK'],
-                content_category: 'Supplement Education'
+                content_name: 'Citrus Bioflavonoids Research',
+                content_category: 'Educational Resource'
             });
             
             // Layer 3: Lead Event
             fbq('track', 'Lead', {
-                content_name: 'Research Page Access'
+                content_name: 'Research Page Access',
+                content_category: 'Education'
             });
             
-            console.log('✅ Facebook Pixel: All events tracked successfully');
+            console.log('✅ Facebook Pixel: All AddToCart events tracked');
+        } else {
+            console.error('❌ Facebook Pixel not loaded!');
+        }
+        
+        // Method 2: Direct API call as backup
+        try {
+            fetch('https://graph.facebook.com/v18.0/1881631042720883/events', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    data: [{
+                        event_name: 'AddToCart',
+                        event_time: Math.floor(Date.now() / 1000),
+                        action_source: 'website',
+                        event_source_url: window.location.href,
+                        user_data: {
+                            client_user_agent: navigator.userAgent
+                        },
+                        custom_data: {
+                            value: 0.00,
+                            currency: 'USD',
+                            content_ids: ['zyntis_main'],
+                            content_type: 'product'
+                        }
+                    }]
+                })
+            }).then(response => {
+                console.log('Direct API response:', response.ok ? 'Success' : 'Failed');
+            }).catch(e => console.log('Direct API fallback error:', e));
+        } catch (e) {
+            console.log('Direct API not available:', e);
+        }
+        
+        // Method 3: Google Analytics if available
+        if(typeof gtag !== 'undefined') {
+            gtag('event', 'add_to_cart', {
+                'items': [{
+                    'id': 'zyntis_main',
+                    'name': 'Zyntis Educational Resource',
+                    'category': 'Education'
+                }]
+            });
         }
         
         // REDIRECT with tracking delay
         setTimeout(function() {
             window.location.href = 'https://67c68r2g1f1mfxaznq3etywfv1.hop.clickbank.net?tid=zyntis_fb_main';
-        }, 300);
-    });
-    
-    // Track button visibility
+        }, 500);
+    }
+
+    // Also keep existing event listener as backup
     document.addEventListener('DOMContentLoaded', function() {
         var btn = document.getElementById('research-access-btn');
-        if(btn && typeof fbq !== 'undefined') {
-            var observer = new IntersectionObserver(function(entries) {
-                if(entries[0].isIntersecting) {
-                    fbq('track', 'ViewContent', {
-                        content_name: 'Research Access Button Viewed',
-                        content_category: 'CTA Visibility'
-                    });
-                }
-            }, {threshold: 0.3});
-            observer.observe(btn);
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                console.log('Button click event listener fired');
+            });
         }
     });
+    
+    // Debug helper
+    console.log('Tracking script loaded successfully');
+    console.log('Pixel status:', typeof fbq !== 'undefined' ? '✅ Loaded' : '❌ Not loaded');
     </script>
 
 </body>
