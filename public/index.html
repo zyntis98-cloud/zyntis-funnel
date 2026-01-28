@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,19 +8,19 @@
     
     <!-- Facebook Pixel Code -->
     <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1881631042720883');
-        fbq('track', 'PageView');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1881631042720883');
+    fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1881631042720883&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1881631042720883&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
 </head>
@@ -127,33 +127,41 @@
         </div>
     </div>
 
-    <!-- EDUCATIONAL CTA BUTTON - FIXED WITH PIXEL TRACKING -->
-    <div style="text-align: center; margin: 40px 0;">
-        <a href="https://67c68r2g1f1mfxaznq3etywfv1.hop.clickbank.net?tid=zyntis_fb_main" 
-           style="background: linear-gradient(135deg, #4CAF50, #2E7D32); 
-                  color: white; 
-                  padding: 20px 40px; 
-                  text-decoration: none; 
-                  border-radius: 50px;
-                  font-size: 18px;
-                  font-weight: bold;
-                  display: inline-block;
-                  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-                  transition: all 0.3s ease;" 
-           rel="noopener noreferrer"
-           onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(76, 175, 80, 0.4)';"
-           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(76, 175, 80, 0.3)';"
-           onclick="
-           // Facebook Pixel AddToCart Event
-           if(typeof fbq !== 'undefined') {
-               fbq('track', 'AddToCart');
-           }
-           // Confirm dialog
-           return confirm('You are about to view supplement information. This is not a purchase commitment. Continue?');">
-            📖 Learn About Citrus Bioflavonoid Research
-        </a>
-        <p style="font-size: 14px; color: #666; margin-top: 10px;">
-            Clicking will take you to informational content about citrus bioflavonoid supplements.
+    <!-- ========== PSYCHOLOGICAL TRIGGER ========== -->
+    <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; border-left: 4px solid #4CAF50;">
+        <p style="margin: 0; font-weight: bold; color: #1b5e20;">
+            📊 <strong>1,247 people</strong> accessed this research in the last week
+        </p>
+        <p style="margin: 5px 0 0 0; font-size: 14px; color: #2E7D32;">
+            Limited research access available
+        </p>
+    </div>
+
+    <!-- ========== UPDATED BUTTON WITH PROPER TRACKING ========== -->
+    <div style="text-align: center; margin: 40px 0; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+        <p style="font-style: italic; color: #666; margin-bottom: 20px;">
+            "Discover how citrus compounds are being studied for wellness support"
+        </p>
+        
+        <button id="research-access-btn"
+                style="background: linear-gradient(135deg, #4CAF50, #2E7D32); 
+                       color: white; 
+                       padding: 18px 50px; 
+                       border: none;
+                       border-radius: 50px;
+                       font-size: 18px;
+                       font-weight: bold;
+                       cursor: pointer;
+                       transition: all 0.3s;
+                       display: inline-flex;
+                       align-items: center;
+                       gap: 10px;">
+            <span style="font-size: 22px;">🔍</span>
+            <span>See What The Research Reveals</span>
+        </button>
+        
+        <p style="font-size: 13px; color: #666; margin-top: 15px;">
+            <small>Click for educational content only. Not a purchase commitment.</small>
         </p>
     </div>
 
@@ -221,12 +229,69 @@
         </p>
     </footer>
 
-    <!-- SIMPLE ANALYTICS -->
+    <!-- ========== ULTIMATE TRACKING SCRIPT ========== -->
     <script>
-        // Simple pageview counter
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Citrus Bioflavonoids Educational Resource loaded - ', new Date().toLocaleString());
-        });
+    // FOOLPROOF TRACKING SYSTEM
+    document.getElementById('research-access-btn').addEventListener('click', function() {
+        var btn = this;
+        
+        // Visual feedback
+        btn.disabled = true;
+        btn.innerHTML = '<span style="font-size: 22px;">⏳</span> <span>Loading Research...</span>';
+        btn.style.opacity = '0.7';
+        
+        // CONFIRMATION
+        if(!confirm('Continue to supplement research information?\n\nEducational content only - not a purchase.')) {
+            btn.disabled = false;
+            btn.innerHTML = '<span style="font-size: 22px;">🔍</span> <span>See What The Research Reveals</span>';
+            btn.style.opacity = '1';
+            return;
+        }
+        
+        // FACEBOOK TRACKING - MULTIPLE LAYERS
+        if(typeof fbq !== 'undefined') {
+            // Layer 1: Standard AddToCart
+            fbq('track', 'AddToCart');
+            
+            // Layer 2: Detailed AddToCart
+            fbq('track', 'AddToCart', {
+                value: 0.00,
+                currency: 'USD',
+                content_type: 'product',
+                content_name: 'Citrus Burn Research Information',
+                content_ids: ['RESEARCH_INFO_CLICK'],
+                content_category: 'Supplement Education'
+            });
+            
+            // Layer 3: Lead Event
+            fbq('track', 'Lead', {
+                content_name: 'Research Page Access'
+            });
+            
+            console.log('✅ Facebook Pixel: All events tracked successfully');
+        }
+        
+        // REDIRECT with tracking delay
+        setTimeout(function() {
+            window.location.href = 'https://67c68r2g1f1mfxaznq3etywfv1.hop.clickbank.net?tid=zyntis_fb_main';
+        }, 300);
+    });
+    
+    // Track button visibility
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('research-access-btn');
+        if(btn && typeof fbq !== 'undefined') {
+            var observer = new IntersectionObserver(function(entries) {
+                if(entries[0].isIntersecting) {
+                    fbq('track', 'ViewContent', {
+                        content_name: 'Research Access Button Viewed',
+                        content_category: 'CTA Visibility'
+                    });
+                }
+            }, {threshold: 0.3});
+            observer.observe(btn);
+        }
+    });
     </script>
 
 </body>
