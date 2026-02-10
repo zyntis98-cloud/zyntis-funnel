@@ -5,7 +5,7 @@
 
 class ModuleLoader {
     constructor() {
-        this.baseUrl = 'https://offers.zyntis.com';
+        this.baseUrl = 'https://wellnessrooted.vercel.app';
         this.contentPath = '/content-library/modules/';
         this.currentTopic = this.getTopicFromURL();
         
@@ -52,25 +52,48 @@ class ModuleLoader {
     
     async loadHeroModule() {
         const moduleName = this.moduleMap[this.currentTopic]?.hero || 'hero-stress.json';
-        const response = await fetch(`${this.contentPath}${moduleName}`);
-        const data = await response.json();
         
-        const heroSection = document.getElementById('dynamic-hero');
-        heroSection.innerHTML = `
-            <div class="container">
-                <div class="hero-content">
-                    <h1>${data.content.title}</h1>
-                    <p class="subtitle">${data.content.subtitle}</p>
-                    <div class="hero-image">
-                        <img src="${data.content.image}" alt="${data.content.title}">
+        try {
+            const response = await fetch(`${this.contentPath}${moduleName}`);
+            if (!response.ok) throw new Error('Hero module not found');
+            
+            const data = await response.json();
+            
+            const heroSection = document.getElementById('dynamic-hero');
+            heroSection.innerHTML = `
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>${data.content.title}</h1>
+                        <p class="subtitle">${data.content.subtitle}</p>
+                        <div class="hero-image">
+                            <img src="${data.content.image}" alt="${data.content.title}" loading="lazy">
+                        </div>
+                        <button class="cta-button" style="background-color: ${data.content.cta_color}" 
+                                onclick="ModuleLoader.trackHeroClick('${data.id}')">
+                            ${data.content.cta_text}
+                        </button>
                     </div>
-                    <button class="cta-button" style="background-color: ${data.content.cta_color}" 
-                            onclick="this.trackHeroClick('${data.id}')">
-                        ${data.content.cta_text}
-                    </button>
                 </div>
-            </div>
-        `;
+            `;
+        } catch (error) {
+            // Fallback hero
+            const heroSection = document.getElementById('dynamic-hero');
+            heroSection.innerHTML = `
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Welcome to WellnessRooted</h1>
+                        <p class="subtitle">Your guide to mindful living and holistic wellness</p>
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=600&fit=crop" alt="Mindfulness" loading="lazy">
+                        </div>
+                        <button class="cta-button" style="background-color: #4CAF50" 
+                                onclick="window.location.href='/?topic=stress-management'">
+                            Explore Wellness Topics
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
     }
     
     async loadArticle() {
@@ -79,6 +102,8 @@ class ModuleLoader {
         
         try {
             const response = await fetch(`/content-library/articles/${this.currentTopic}/${articleFile}`);
+            if (!response.ok) throw new Error('Article not found');
+            
             const markdown = await response.text();
             
             // Convert markdown to HTML (simplified version)
@@ -89,41 +114,80 @@ class ModuleLoader {
             this.trackArticleView(articleFile);
         } catch (error) {
             // Fallback to default article
-            const fallbackResponse = await fetch('/content-library/articles/stress-management/mindfulness-beginners-guide.md');
-            const markdown = await fallbackResponse.text();
-            document.getElementById('content-article').innerHTML = this.markdownToHTML(markdown);
+            try {
+                const fallbackResponse = await fetch('/content-library/articles/stress-management/mindfulness-beginners-guide.md');
+                const markdown = await fallbackResponse.text();
+                document.getElementById('content-article').innerHTML = this.markdownToHTML(markdown);
+            } catch (e) {
+                // Ultimate fallback
+                document.getElementById('content-article').innerHTML = `
+                    <h2>Welcome to WellnessRooted</h2>
+                    <p>Discover evidence-based wellness strategies and mindful living techniques.</p>
+                    <p>Our content library is being prepared with valuable resources on:</p>
+                    <ul>
+                        <li>Stress management and mindfulness</li>
+                        <li>Health optimization strategies</li>
+                        <li>Personal growth and development</li>
+                    </ul>
+                    <p>Please check back soon for more comprehensive articles and resources.</p>
+                `;
+            }
         }
     }
     
     async loadCTAModule() {
         const moduleName = this.moduleMap[this.currentTopic]?.cta || 'cta-mindfulness.json';
-        const response = await fetch(`${this.contentPath}${moduleName}`);
-        const data = await response.json();
         
-        const ctaSection = document.getElementById('dynamic-cta');
-        ctaSection.innerHTML = `
-            <div class="container">
-                <div class="cta-box ${data.compliance}-risk">
-                    <h3>${data.content.heading}</h3>
-                    <p>${data.content.description}</p>
-                    
-                    <div class="cta-actions">
-                        <a href="${data.affiliate_link}" 
-                           class="primary-cta"
-                           onclick="ModuleLoader.trackCTAClick('${data.offer}', '${data.id}')"
-                           target="_blank" rel="noopener noreferrer">
-                            ${data.content.button_text} <i class="fas fa-arrow-right"></i>
-                        </a>
+        try {
+            const response = await fetch(`${this.contentPath}${moduleName}`);
+            if (!response.ok) throw new Error('CTA module not found');
+            
+            const data = await response.json();
+            
+            const ctaSection = document.getElementById('dynamic-cta');
+            ctaSection.innerHTML = `
+                <div class="container">
+                    <div class="cta-box ${data.compliance}-risk">
+                        <h3>${data.content.heading}</h3>
+                        <p>${data.content.description}</p>
                         
-                        <button class="secondary-cta" onclick="ModuleLoader.showMoreInfo()">
-                            Learn More About This Topic
-                        </button>
+                        <div class="cta-actions">
+                            <a href="${data.affiliate_link}" 
+                               class="primary-cta"
+                               onclick="ModuleLoader.trackCTAClick('${data.offer}', '${data.id}')"
+                               target="_blank" rel="noopener noreferrer">
+                                ${data.content.button_text} <i class="fas fa-arrow-right"></i>
+                            </a>
+                            
+                            <button class="secondary-cta" onclick="ModuleLoader.showMoreInfo()">
+                                Learn More About This Topic
+                            </button>
+                        </div>
+                        
+                        <p class="cta-disclaimer"><small>${data.content.disclaimer}</small></p>
                     </div>
-                    
-                    <p class="cta-disclaimer"><small>${data.content.disclaimer}</small></p>
                 </div>
-            </div>
-        `;
+            `;
+        } catch (error) {
+            // Fallback CTA
+            const ctaSection = document.getElementById('dynamic-cta');
+            ctaSection.innerHTML = `
+                <div class="container">
+                    <div class="cta-box low-risk">
+                        <h3>Continue Your Wellness Journey</h3>
+                        <p>Explore our growing library of wellness resources and educational content.</p>
+                        
+                        <div class="cta-actions">
+                            <a href="/?topic=stress-management" class="primary-cta">
+                                Browse All Topics <i class="fas fa-book-open"></i>
+                            </a>
+                        </div>
+                        
+                        <p class="cta-disclaimer"><small>Note: This is an educational resource. We may recommend products through affiliate links.</small></p>
+                    </div>
+                </div>
+            `;
+        }
     }
     
     async loadRelatedResources() {
@@ -141,7 +205,7 @@ class ModuleLoader {
             <div class="resource-card" data-topic="${topic}">
                 <h4>${this.formatTopicName(topic)}</h4>
                 <p>Explore resources about ${topic.replace('-', ' ')}</p>
-                <a href="/?topic=${topic}" class="resource-link">
+                <a href="/?topic=${topic}" class="resource-link" onclick="ModuleLoader.trackTopicClick('${topic}')">
                     View Resources <i class="fas fa-book-open"></i>
                 </a>
             </div>
@@ -158,7 +222,7 @@ class ModuleLoader {
         } catch (error) {
             // Default disclaimer
             document.getElementById('compliance-disclaimer').innerHTML = `
-                <p><strong>Disclaimer:</strong> Content is for educational purposes only. Results may vary.</p>
+                <p><strong>Educational Resource Disclaimer:</strong> This content is for informational purposes only. We are not medical professionals. Always consult with qualified professionals for medical advice. Some links may be affiliate links.</p>
             `;
         }
     }
@@ -173,8 +237,8 @@ class ModuleLoader {
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             .replace(/^\> (.*$)/gm, '<blockquote>$1</blockquote>')
             .replace(/\n\n/g, '</p><p>')
-            .replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2">')
-            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+            .replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2" loading="lazy">')
+            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
     }
     
     formatTopicName(topic) {
@@ -204,11 +268,21 @@ class ModuleLoader {
     }
     
     static trackCTAClick(offerId, moduleId) {
-        if (typeof fbq !== 'undefined') {
+        // Use the global function from Pixel code if available
+        if (typeof trackCTAClick === 'function') {
+            trackCTAClick(offerId, moduleId);
+        } else if (typeof fbq !== 'undefined') {
+            // Fallback to direct tracking
             fbq('track', 'Lead', {
                 content_name: offerId,
                 content_category: 'affiliate_offer',
+                content_type: 'product',
                 module_id: moduleId
+            });
+            
+            fbq('track', 'InitiateCheckout', {
+                content_name: offerId,
+                num_items: 1
             });
         }
         
@@ -218,6 +292,36 @@ class ModuleLoader {
             timestamp: new Date().toISOString(),
             module: moduleId
         }));
+    }
+    
+    static trackHeroClick(moduleId) {
+        if (typeof fbq !== 'undefined') {
+            fbq('trackCustom', 'HeroClick', {
+                module_id: moduleId,
+                timestamp: new Date().toISOString()
+            });
+        }
+    }
+    
+    static trackTopicClick(topic) {
+        if (typeof fbq !== 'undefined') {
+            fbq('trackCustom', 'TopicNavigation', {
+                from_topic: this.currentTopic,
+                to_topic: topic,
+                timestamp: new Date().toISOString()
+            });
+        }
+    }
+    
+    static showMoreInfo() {
+        alert('More educational resources are being added daily. Check back soon for comprehensive guides on each wellness topic.');
+        
+        if (typeof fbq !== 'undefined') {
+            fbq('trackCustom', 'InfoRequest', {
+                topic: this.currentTopic,
+                timestamp: new Date().toISOString()
+            });
+        }
     }
     
     showErrorState() {
@@ -230,9 +334,9 @@ class ModuleLoader {
                         <p>We're experiencing technical difficulties loading specialized content.</p>
                         <p>Explore our main topics:</p>
                         <div class="error-links">
-                            <a href="/?topic=stress-management">Stress Management</a>
-                            <a href="/?topic=health-optimization">Health Optimization</a>
-                            <a href="/?topic=personal-growth">Personal Growth</a>
+                            <a href="/?topic=stress-management" onclick="ModuleLoader.trackTopicClick('stress-management')">Stress Management</a>
+                            <a href="/?topic=health-optimization" onclick="ModuleLoader.trackTopicClick('health-optimization')">Health Optimization</a>
+                            <a href="/?topic=personal-growth" onclick="ModuleLoader.trackTopicClick('personal-growth')">Personal Growth</a>
                         </div>
                     </div>
                 </div>
