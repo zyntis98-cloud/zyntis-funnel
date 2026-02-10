@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindfulness & Wellness Resources</title>
+    <meta name="description" content="Educational resources for stress management and wellness">
+    
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1881631042720883');
+        fbq('track', 'PageView');
+        
+        window.contentParams = new URLSearchParams(window.location.search);
+        fbq('trackCustom', 'DynamicPageLoad', {
+            topic: window.contentParams.get('topic') || 'stress-management',
+            source: window.contentParams.get('utm_source') || 'direct'
+        });
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+             src="https://www.facebook.com/tr?id=1881631042720883&ev=PageView&noscript=1"/>
+    </noscript>
+    
+    <link rel="stylesheet" href="/templates/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/templates/module-loader.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="https://offers.zyntis.com">WellnessRooted</a>
+            </div>
+            <nav class="main-nav">
+                <a href="/?topic=stress-management" data-topic="stress-management">Stress Relief</a>
+                <a href="/?topic=health-optimization" data-topic="health-optimization">Health Tips</a>
+                <a href="/?topic=personal-growth" data-topic="personal-growth">Personal Growth</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="dynamic-hero" class="hero-section">
+        <div class="container">
+            <div class="loading-placeholder">
+                <h2>Loading educational content...</h2>
+                <p>Preparing valuable resources for you</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="educational-content" id="main-content">
+        <div class="container">
+            <article id="content-article">
+                <div class="loading-article">
+                    <div class="skeleton-line" style="width: 100%; height: 30px;"></div>
+                    <div class="skeleton-line" style="width: 80%; height: 20px;"></div>
+                    <div class="skeleton-line" style="width: 90%; height: 200px;"></div>
+                </div>
+            </article>
+
+            <aside class="related-resources" id="related-resources">
+                <h3>Related Topics</h3>
+                <div class="resource-grid" id="resource-grid"></div>
+            </aside>
+        </div>
+    </main>
+
+    <section class="cta-section" id="dynamic-cta">
+        <div class="container">
+            <div class="cta-loading">
+                <p>Finding relevant resources...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="compliance-disclaimer" id="compliance-disclaimer">
+                <p><strong>Educational Resource Disclaimer:</strong> This content is for informational purposes only. We are not medical professionals. Always consult with qualified professionals for medical advice. Some links may be affiliate links.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a> | 
+                <a href="/disclaimer">Full Disclaimer</a> | 
+                <a href="/contact">Contact</a>
+            </div>
+            <p class="copyright">&copy; <span id="current-year">2024</span> WellnessRooted. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/scripts/analytics-tracker.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            const params = new URLSearchParams(window.location.search);
+            const topic = params.get('topic') || 'stress-management';
+            document.querySelectorAll('[data-topic]').forEach(link => {
+                if (link.getAttribute('data-topic') === topic) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
