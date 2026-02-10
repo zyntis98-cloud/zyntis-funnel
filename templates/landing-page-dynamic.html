@@ -6,29 +6,71 @@
     <title>Mindfulness & Wellness Resources</title>
     <meta name="description" content="Educational resources for stress management and wellness">
     
-    <!-- Facebook Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1881631042720883');
-        fbq('track', 'PageView');
-        
-        window.contentParams = new URLSearchParams(window.location.search);
-        fbq('trackCustom', 'DynamicPageLoad', {
-            topic: window.contentParams.get('topic') || 'stress-management',
-            source: window.contentParams.get('utm_source') || 'direct'
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+// Initialize Pixel
+fbq('init', '1881631042720883');
+
+// Track Standard Events
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {
+    content_name: 'WellnessRooted Landing Page',
+    content_category: 'Wellness',
+    content_type: 'product'
+});
+
+// Enhanced tracking for dynamic content
+window.contentParams = new URLSearchParams(window.location.search);
+const topic = contentParams.get('topic') || 'stress-management';
+
+// Custom Event for Topic View
+fbq('trackCustom', 'TopicView', {
+    topic: topic,
+    url: window.location.href,
+    source: contentParams.get('utm_source') || 'direct',
+    campaign: contentParams.get('utm_campaign') || 'organic'
+});
+
+// Track engagement after 10 seconds
+setTimeout(function() {
+    if (document.hasFocus()) {
+        fbq('trackCustom', 'PageEngaged', {
+            time_spent: 10,
+            topic: topic,
+            scroll_depth: 'minimal'
         });
-    </script>
-    <noscript>
-        <img height="1" width="1" style="display:none" 
-             src="https://www.facebook.com/tr?id=1881631042720883&ev=PageView&noscript=1"/>
-    </noscript>
+    }
+}, 10000);
+
+// Track CTA clicks (added by module-loader.js)
+window.trackCTAClick = function(offerId, moduleId) {
+    fbq('track', 'Lead', {
+        content_name: offerId,
+        content_category: 'affiliate_offer',
+        content_type: 'product',
+        module_id: moduleId
+    });
+    
+    fbq('track', 'InitiateCheckout', {
+        content_name: offerId,
+        num_items: 1
+    });
+};
+</script>
+<noscript>
+<img height="1" width="1" style="display:none" 
+     src="https://www.facebook.com/tr?id=1881631042720883&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
     
     <link rel="stylesheet" href="/templates/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
