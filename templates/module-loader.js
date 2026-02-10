@@ -5,11 +5,11 @@
 
 class ModuleLoader {
     constructor() {
-        this.baseUrl = 'https://wellnessrooted.vercel.app';
+        this.baseUrl = 'https://wellnessrooted.zyntis.com';
         this.contentPath = '/content-library/modules/';
         this.currentTopic = this.getTopicFromURL();
         
-        // Module mapping based on topic
+        // Module mapping based on topic - UPDATED WITH PERSONAL GROWTH
         this.moduleMap = {
             'stress-management': {
                 hero: 'hero-stress.json',
@@ -19,6 +19,11 @@ class ModuleLoader {
             'health-optimization': {
                 hero: 'hero-health.json',
                 cta: 'cta-java-burn.json',
+                disclaimer: 'disclaimer-medium-risk.json'
+            },
+            'personal-growth': {
+                hero: 'hero-growth.json',
+                cta: 'cta-wealth-dna.json',
                 disclaimer: 'disclaimer-medium-risk.json'
             }
         };
