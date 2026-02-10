@@ -1,0 +1,14 @@
+{
+  "id": "hero-stress",
+  "type": "hero",
+  "topic": "stress-management",
+  "compliance": "low-risk",
+  "content": {
+    "title": "Feeling Overwhelmed? Science-Backed Stress Relief Strategies",
+    "subtitle": "Discover how thousands are finding calm in just minutes a day",
+    "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=600&fit=crop",
+    "cta_text": "Explore Stress Relief Methods",
+    "cta_color": "#4CAF50"
+  },
+  "tags": ["mindfulness", "meditation", "beginner-friendly", "educational"]
+}
