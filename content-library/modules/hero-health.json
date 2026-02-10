@@ -1,0 +1,14 @@
+{
+  "id": "hero-health",
+  "type": "hero",
+  "topic": "health-optimization",
+  "compliance": "medium-risk",
+  "content": {
+    "title": "Understanding Your Body's Natural Rhythms",
+    "subtitle": "Evidence-based approaches to daily wellness and energy",
+    "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=600&fit=crop",
+    "cta_text": "Explore Health Optimization",
+    "cta_color": "#2196F3"
+  },
+  "tags": ["health", "wellness", "energy", "education"]
+}
