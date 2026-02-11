@@ -1,14 +1,9 @@
-// module-loader.js - ONLY FUNCTIONALITY FIXES, ZERO DESIGN CHANGES
-// Your exact design preserved completely
-
+// module-loader.js - Works with your fixed HTML
 const WellnessRootedLoader = {
-    // Configuration
     config: {
-        defaultTopic: 'stress-management',
-        modulePath: '/content-library/modules/'
+        defaultTopic: 'stress-management'
     },
 
-    // Topic content - embedded directly to ensure it works
     content: {
         'stress-management': {
             hero: {
@@ -23,22 +18,14 @@ const WellnessRootedLoader = {
                 affiliate_link: 'https://66758wz8452oer1zv4xl08swem.hop.clickbank.net?tid=zyntis_fb_main'
             },
             articles: [
-                {
-                    title: 'Mindfulness Basics',
-                    content: 'Learn practical techniques for your wellness journey...',
-                    readTime: 3
-                },
-                {
-                    title: 'Stress Science',
-                    content: 'Learn practical techniques for your wellness journey...',
-                    readTime: 4
-                },
-                {
-                    title: 'Breathing Techniques',
-                    content: 'Learn practical techniques for your wellness journey...',
-                    readTime: 5
-                }
-            ]
+                { title: 'Mindfulness Basics', content: 'Learn practical techniques for your wellness journey...', readTime: 3 },
+                { title: 'Stress Science', content: 'Learn practical techniques for your wellness journey...', readTime: 4 },
+                { title: 'Breathing Techniques', content: 'Learn practical techniques for your wellness journey...', readTime: 5 }
+            ],
+            disclaimer: {
+                text: 'This is an educational resource about mindfulness techniques. Individual experiences may vary.',
+                risk: 'low'
+            }
         },
         'health-optimization': {
             hero: {
@@ -53,22 +40,14 @@ const WellnessRootedLoader = {
                 affiliate_link: 'https://d8f50l6f175q3o48cke47dwu2s.hop.clickbank.net?tid=zyntis_fb_main'
             },
             articles: [
-                {
-                    title: 'Morning Metabolism',
-                    content: 'Simple morning habits that support healthy metabolic function.',
-                    readTime: 3
-                },
-                {
-                    title: 'Coffee Benefits',
-                    content: 'The surprising health benefits of your morning coffee.',
-                    readTime: 4
-                },
-                {
-                    title: 'Healthy Routines',
-                    content: 'Small changes that compound into significant health improvements.',
-                    readTime: 5
-                }
-            ]
+                { title: 'Morning Metabolism', content: 'Simple morning habits that support healthy metabolic function.', readTime: 3 },
+                { title: 'Coffee Benefits', content: 'The surprising health benefits of your morning coffee.', readTime: 4 },
+                { title: 'Healthy Routines', content: 'Small changes that compound into significant health improvements.', readTime: 5 }
+            ],
+            disclaimer: {
+                text: 'This is an educational resource about health optimization. Individual results may vary.',
+                risk: 'medium'
+            }
         },
         'personal-growth': {
             hero: {
@@ -83,158 +62,91 @@ const WellnessRootedLoader = {
                 affiliate_link: 'https://f14dfo0k43wockbujhj2itbyf3.hop.clickbank.net?tid=zyntis_fb_main'
             },
             articles: [
-                {
-                    title: 'Abundance Mindset',
-                    content: 'Shift from scarcity to abundance with practical exercises.',
-                    readTime: 3
-                },
-                {
-                    title: 'Goal Setting',
-                    content: 'A neuroscience-backed approach to achieving meaningful goals.',
-                    readTime: 4
-                },
-                {
-                    title: 'Morning Success',
-                    content: 'How high-performers structure their first hour for success.',
-                    readTime: 5
-                }
-            ]
+                { title: 'Abundance Mindset', content: 'Shift from scarcity to abundance with practical exercises.', readTime: 3 },
+                { title: 'Goal Setting', content: 'A neuroscience-backed approach to achieving meaningful goals.', readTime: 4 },
+                { title: 'Morning Success', content: 'How high-performers structure their first hour for success.', readTime: 5 }
+            ],
+            disclaimer: {
+                text: 'This is an educational resource about personal growth. Individual experiences may vary.',
+                risk: 'medium'
+            }
         }
     },
 
     init: function() {
-        // Get topic from URL
         const urlParams = new URLSearchParams(window.location.search);
         let topic = urlParams.get('topic') || 'stress-management';
-        
-        // Load content for this topic
         this.loadTopic(topic);
-        
-        // Make buttons work
         this.setupNavigation();
     },
 
     loadTopic: function(topic) {
-        // Get content for this topic
         const content = this.content[topic] || this.content['stress-management'];
         
-        // Update hero section
-        this.updateHero(content.hero);
+        // Update hero
+        const heroH1 = document.querySelector('#hero-section h1');
+        const heroP = document.querySelector('#hero-section .hero-subheadline');
+        const heroBtn = document.querySelector('#hero-section .cta-button');
+        if (heroH1) heroH1.textContent = content.hero.headline;
+        if (heroP) heroP.textContent = content.hero.subheadline;
+        if (heroBtn) heroBtn.textContent = content.hero.cta;
         
-        // Update CTA section
-        this.updateCTA(content.cta);
+        // Update CTA
+        const ctaH2 = document.querySelector('#cta-section h2');
+        const ctaP = document.querySelector('#cta-section p');
+        const ctaLink = document.querySelector('#cta-section .affiliate-link');
+        if (ctaH2) ctaH2.textContent = content.cta.headline;
+        if (ctaP) ctaP.textContent = content.cta.description;
+        if (ctaLink) {
+            ctaLink.textContent = content.cta.button_text;
+            ctaLink.href = content.cta.affiliate_link;
+        }
         
         // Update articles
-        this.updateArticles(content.articles);
-        
-        // Update active button
-        this.setActiveButton(topic);
-    },
-
-    updateHero: function(hero) {
-        const heroSection = document.getElementById('hero-section');
-        if (heroSection) {
-            // Find the h1 and p elements inside hero
-            const h1 = heroSection.querySelector('h1');
-            const p = heroSection.querySelector('.hero-subheadline');
-            const button = heroSection.querySelector('.cta-button');
-            
-            if (h1) h1.textContent = hero.headline;
-            if (p) p.textContent = hero.subheadline;
-            if (button) button.textContent = hero.cta;
-        }
-    },
-
-    updateCTA: function(cta) {
-        const ctaSection = document.getElementById('cta-section');
-        if (ctaSection) {
-            const h2 = ctaSection.querySelector('h2');
-            const p = ctaSection.querySelector('p');
-            const link = ctaSection.querySelector('.affiliate-link');
-            
-            if (h2) h2.textContent = cta.headline;
-            if (p) p.textContent = cta.description;
-            if (link) {
-                link.textContent = cta.button_text;
-                link.href = cta.affiliate_link;
-            }
-        }
-    },
-
-    updateArticles: function(articles) {
-        const articlesGrid = document.getElementById('articles-grid');
-        if (articlesGrid) {
-            const cards = articlesGrid.querySelectorAll('.content-card');
-            cards.forEach((card, index) => {
-                if (articles[index]) {
-                    const h3 = card.querySelector('h3');
-                    const p = card.querySelector('p');
-                    const readTime = card.querySelector('.read-time');
-                    
-                    if (h3) h3.textContent = articles[index].title;
-                    if (p) p.textContent = articles[index].content;
-                    if (readTime) readTime.textContent = `${articles[index].readTime} min read`;
-                }
-            });
-        }
-    },
-
-    setupNavigation: function() {
-        // Find all buttons by their exact text
-        const buttons = document.querySelectorAll('button');
-        
-        buttons.forEach(button => {
-            const text = button.textContent.trim();
-            
-            if (text === 'Stress Relief') {
-                button.onclick = (e) => {
-                    e.preventDefault();
-                    window.location.href = '?topic=stress-management';
-                };
-            }
-            else if (text === 'Health Tips') {
-                button.onclick = (e) => {
-                    e.preventDefault();
-                    window.location.href = '?topic=health-optimization';
-                };
-            }
-            else if (text === 'Personal Growth') {
-                button.onclick = (e) => {
-                    e.preventDefault();
-                    window.location.href = '?topic=personal-growth';
-                };
+        const cards = document.querySelectorAll('.content-card');
+        cards.forEach((card, i) => {
+            if (content.articles[i]) {
+                const h3 = card.querySelector('h3');
+                const p = card.querySelector('p');
+                const time = card.querySelector('.read-time');
+                if (h3) h3.textContent = content.articles[i].title;
+                if (p) p.textContent = content.articles[i].content;
+                if (time) time.textContent = `${content.articles[i].readTime} min read`;
             }
         });
         
-        // Fix "Start Your Journey" button
-        setTimeout(() => {
-            const startJourneyBtn = document.querySelector('.hero .cta-button');
-            if (startJourneyBtn) {
-                startJourneyBtn.onclick = (e) => {
-                    e.preventDefault();
-                    // Scroll to CTA section
-                    document.getElementById('cta-section').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                };
-            }
-        }, 100);
+        // Update disclaimer
+        const disclaimer = document.querySelector('#disclaimer-section .disclaimer-container p');
+        if (disclaimer) disclaimer.textContent = content.disclaimer.text;
+        
+        this.setActiveButton(topic);
+    },
+
+    setupNavigation: function() {
+        // Topic buttons
+        document.querySelectorAll('.topic-btn').forEach(btn => {
+            btn.onclick = (e) => {
+                e.preventDefault();
+                const topic = btn.dataset.topic;
+                window.location.href = `?topic=${topic}`;
+            };
+        });
+        
+        // Start Your Journey button - scroll to CTA
+        const startBtn = document.querySelector('.hero-cta');
+        if (startBtn) {
+            startBtn.onclick = (e) => {
+                e.preventDefault();
+                document.getElementById('cta-section').scrollIntoView({ behavior: 'smooth' });
+            };
+        }
     },
 
     setActiveButton: function(topic) {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.classList.remove('active');
-            const text = button.textContent.trim();
-            
-            if (topic === 'stress-management' && text === 'Stress Relief') {
-                button.classList.add('active');
-            }
-            else if (topic === 'health-optimization' && text === 'Health Tips') {
-                button.classList.add('active');
-            }
-            else if (topic === 'personal-growth' && text === 'Personal Growth') {
-                button.classList.add('active');
+        document.querySelectorAll('.topic-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.topic === topic) {
+                btn.classList.add('active');
             }
         });
     }
