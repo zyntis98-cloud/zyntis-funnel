@@ -25,47 +25,75 @@
     <link rel="stylesheet" href="/templates/style.css">
 </head>
 <body>
-    <!-- Navigation / Topic Selector -->
+    <!-- Navigation / Topic Selector - FIXED: Removed extra tags -->
     <div class="topic-buttons">
-    <button class="topic-btn active" id="btn-stress" data-topic="stress-management">
-        <span class="btn-icon">🧘</span>
-        Stress Relief
-    </button>
-    <button class="topic-btn" id="btn-health" data-topic="health-optimization">
-        <span class="btn-icon">⚡</span>
-        Health Tips
-    </button>
-    <button class="topic-btn" id="btn-growth" data-topic="personal-growth">
-        <span class="btn-icon">🌱</span>
-        Personal Growth
-    </button>
-</div>
-        </div>
-    </nav>
+        <button class="topic-btn active" id="btn-stress" data-topic="stress-management">
+            <span class="btn-icon">🧘</span>
+            Stress Relief
+        </button>
+        <button class="topic-btn" id="btn-health" data-topic="health-optimization">
+            <span class="btn-icon">⚡</span>
+            Health Tips
+        </button>
+        <button class="topic-btn" id="btn-growth" data-topic="personal-growth">
+            <span class="btn-icon">🌱</span>
+            Personal Growth
+        </button>
+    </div>
 
-    <!-- Hero Section - Dynamically Loaded -->
+    <!-- Hero Section - FIXED: Added initial content structure -->
     <section id="hero-section" class="hero">
-        <!-- Content loaded by module-loader.js -->
+        <div class="hero-content">
+            <h1>7 Minutes to a Calmer Mind</h1>
+            <p class="hero-subheadline">Evidence-based mindfulness techniques that fit your busy schedule</p>
+            <button class="cta-button hero-cta">Start Your Journey</button>
+        </div>
     </section>
 
-    <!-- Educational Content Grid -->
+    <!-- Educational Content Grid - FIXED: Added initial article cards -->
     <section class="content-grid">
         <div class="container">
             <h2 class="section-title">Latest in Wellness</h2>
             <div id="articles-grid" class="articles-grid">
-                <!-- Articles loaded dynamically -->
+                <article class="content-card">
+                    <h3>Mindfulness Basics</h3>
+                    <p>Learn practical techniques for your wellness journey...</p>
+                    <span class="read-time">3 min read</span>
+                </article>
+                <article class="content-card">
+                    <h3>Stress Science</h3>
+                    <p>Learn practical techniques for your wellness journey...</p>
+                    <span class="read-time">4 min read</span>
+                </article>
+                <article class="content-card">
+                    <h3>Breathing Techniques</h3>
+                    <p>Learn practical techniques for your wellness journey...</p>
+                    <span class="read-time">5 min read</span>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section - Dynamically Loaded -->
+    <!-- CTA Section - FIXED: Added initial CTA structure -->
     <section id="cta-section" class="cta-section">
-        <!-- Content loaded by module-loader.js -->
+        <div class="cta-container">
+            <h2>Ready for More Peace?</h2>
+            <p>Join thousands who've found calm with this 7-minute practice</p>
+            <a href="https://66758wz8452oer1zv4xl08swem.hop.clickbank.net?tid=zyntis_fb_main" 
+               class="affiliate-link" 
+               target="_blank" 
+               rel="nofollow sponsored">
+                Learn About Mindfulness
+            </a>
+        </div>
     </section>
 
-    <!-- Disclaimer Section - Dynamically Loaded -->
+    <!-- Disclaimer Section - FIXED: Added initial disclaimer -->
     <section id="disclaimer-section" class="disclaimer-section">
-        <!-- Content loaded by module-loader.js -->
+        <div class="disclaimer-container disclaimer-low">
+            <p>This is an educational resource about mindfulness techniques. Individual experiences may vary.</p>
+            <a href="/privacy">Privacy</a> • <a href="/terms">Terms</a>
+        </div>
     </section>
 
     <!-- Loading Indicator -->
