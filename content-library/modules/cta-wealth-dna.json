@@ -1,13 +1,7 @@
 {
-  "id": "cta-wealth-dna",
-  "type": "cta",
-  "offer": "wealth-dna-code",
-  "affiliate_link": "https://f14dfo0k43wockbujhj2itbyf3.hop.clickbank.net?tid=zyntis_fb_main",
-  "compliance": "medium-risk",
-  "content": {
-    "heading": "Curious About Mindset and Abundance Principles?",
-    "description": "Many successful people explore various mindset approaches. Here's information about one framework that's discussed in personal development circles:",
-    "button_text": "Learn About Abundance Mindset Approaches",
-    "disclaimer": "Note: This is for educational purposes. Results depend on individual application and effort. We may receive compensation for referrals."
-  }
+    "headline": "Rewrite Your Wealth Story",
+    "description": "The 7-minute mindset shift that's changing lives",
+    "button_text": "Explore the Program",
+    "affiliate_link": "https://f14dfo0k43wockbujhj2itbyf3.hop.clickbank.net?tid=zyntis_fb_main",
+    "topic": "personal-growth"
 }
