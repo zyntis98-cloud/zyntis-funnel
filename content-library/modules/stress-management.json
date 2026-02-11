@@ -1,0 +1,75 @@
+{
+  "topic": "stress-management",
+  "displayName": "Stress Relief",
+  "cta": {
+    "headline": "Ready for More Peace?",
+    "description": "Join thousands who've found calm with this 7-minute practice",
+    "buttonText": "Learn About Mindfulness",
+    "affiliateLink": "https://66758wz8452oer1zv4xl08swem.hop.clickbank.net?tid=zyntis_fb_main"
+  },
+  "articles": [
+    {
+      "id": "mindfulness-basics",
+      "title": "Mindfulness Basics",
+      "readTime": 3,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Mindfulness is the practice of being present in the moment without judgment..."
+    },
+    {
+      "id": "stress-science",
+      "title": "Stress Science",
+      "readTime": 4,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Understanding how stress affects your body is the first step to managing it..."
+    },
+    {
+      "id": "breathing-techniques",
+      "title": "Breathing Techniques",
+      "readTime": 5,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Controlled breathing sends signals to your nervous system to activate calm..."
+    },
+    {
+      "id": "morning-calm-rituals",
+      "title": "Morning Calm Rituals",
+      "readTime": 4,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Start each day grounded with these 5-minute practices that prevent stress before it begins..."
+    },
+    {
+      "id": "workplace-stress-reset",
+      "title": "Workplace Stress Reset",
+      "readTime": 5,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Immediate techniques for those high-pressure moments when you need calm fast..."
+    },
+    {
+      "id": "sleep-stress-connection",
+      "title": "Sleep & Stress Connection",
+      "readTime": 6,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Why quality sleep is your body's natural stress reset button..."
+    },
+    {
+      "id": "mindful-eating-calm",
+      "title": "Mindful Eating for Calm",
+      "readTime": 4,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Using mealtime as a stress reduction opportunity through mindful awareness..."
+    },
+    {
+      "id": "digital-detox-basics",
+      "title": "Digital Detox Basics",
+      "readTime": 5,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Reducing screen anxiety with simple boundaries and tech-life balance..."
+    },
+    {
+      "id": "gratitude-stress-relief",
+      "title": "Gratitude & Stress Relief",
+      "readTime": 3,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Science-backed benefits of daily gratitude practice on cortisol levels..."
+    }
+  ]
+}
