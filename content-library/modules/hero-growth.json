@@ -1,14 +1,7 @@
 {
-  "id": "hero-growth",
-  "type": "hero",
-  "topic": "personal-growth",
-  "compliance": "medium-risk",
-  "content": {
-    "title": "Unlock Your Potential: Mindset Strategies for Growth",
-    "subtitle": "Discover how successful people approach personal development and mindset shifts",
-    "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=600&fit=crop",
-    "cta_text": "Explore Growth Strategies",
-    "cta_color": "#9C27B0"
-  },
-  "tags": ["mindset", "personal-growth", "development", "education"]
+    "headline": "Unlock Your Abundance Mindset",
+    "subheadline": "Breakthrough limiting beliefs in just minutes a day",
+    "cta": "Begin Transformation",
+    "background_color": "#f8fafc",
+    "theme": "growth"
 }
