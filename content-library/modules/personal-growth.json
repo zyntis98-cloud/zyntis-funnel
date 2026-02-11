@@ -1,0 +1,33 @@
+{
+  "topic": "personal-growth",
+  "displayName": "Personal Growth",
+  "cta": {
+    "headline": "Ready to Unlock Your Potential?",
+    "description": "Join thousands who've transformed their mindset",
+    "buttonText": "Learn About Wealth DNA",
+    "affiliateLink": "https://f14dfo0k43wockbujhj2itbyf3.hop.clickbank.net?tid=zyntis_fb_main"
+  },
+  "articles": [
+    {
+      "id": "abundance-mindset",
+      "title": "Abundance Mindset",
+      "readTime": 3,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Shifting from scarcity to abundance transforms how you see opportunity..."
+    },
+    {
+      "id": "goal-setting",
+      "title": "Goal Setting",
+      "readTime": 4,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Science-backed methods for setting and achieving meaningful goals..."
+    },
+    {
+      "id": "morning-success",
+      "title": "Morning Success",
+      "readTime": 5,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "How high-performers structure their first hour for maximum impact..."
+    }
+  ]
+}
