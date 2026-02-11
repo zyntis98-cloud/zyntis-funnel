@@ -1,13 +1,7 @@
 {
-  "id": "cta-java-burn",
-  "type": "cta",
-  "offer": "java-burn",
-  "affiliate_link": "https://d8f50l6f175q3o48cke47dwu2s.hop.clickbank.net?tid=zyntis_fb_main",
-  "compliance": "high-risk",
-  "content": {
-    "heading": "Interested in Morning Routine Optimization?",
-    "description": "Some people explore various approaches to starting their day. Here's information about one approach that's discussed online:",
-    "button_text": "Learn About Morning Wellness Approaches",
-    "disclaimer": "Note: This is informational only. These statements have not been evaluated by the FDA. Individual results vary dramatically."
-  }
+    "headline": "Transform Your Morning Coffee",
+    "description": "Discover why millions are adding this to their daily routine",
+    "button_text": "See How It Works",
+    "affiliate_link": "https://d8f50l6f175q3o48cke47dwu2s.hop.clickbank.net?tid=zyntis_fb_main",
+    "topic": "health-optimization"
 }
