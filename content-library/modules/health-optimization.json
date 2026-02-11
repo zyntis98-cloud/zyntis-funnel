@@ -1,0 +1,33 @@
+{
+  "topic": "health-optimization",
+  "displayName": "Health Tips",
+  "cta": {
+    "headline": "Ready to Transform Your Health?",
+    "description": "Discover how morning rituals can optimize your metabolism",
+    "buttonText": "Learn About Java Burn",
+    "affiliateLink": "https://d8f50l6f175q3o48cke47dwu2s.hop.clickbank.net?tid=zyntis_fb_main"
+  },
+  "articles": [
+    {
+      "id": "morning-metabolism",
+      "title": "Morning Metabolism",
+      "readTime": 3,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "How your first morning choices affect calorie burning all day..."
+    },
+    {
+      "id": "coffee-benefits",
+      "title": "Coffee Benefits",
+      "readTime": 4,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Beyond caffeine: the surprising health benefits of your morning brew..."
+    },
+    {
+      "id": "healthy-routines",
+      "title": "Healthy Routines",
+      "readTime": 5,
+      "description": "Learn practical techniques for your wellness journey...",
+      "content": "Small daily habits that compound into lasting health improvements..."
+    }
+  ]
+}
