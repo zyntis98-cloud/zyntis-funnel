@@ -1,7 +1,8 @@
 {
-  "id": "disclaimer-low-risk",
-  "type": "disclaimer",
-  "topic": "stress-management",
-  "content": "This content is for educational purposes only. We are not medical professionals. Always consult with qualified professionals for medical advice. Some links may be affiliate links.",
-  "title": "Educational Resource Disclaimer"
+    "risk_level": "low",
+    "text": "This is an educational resource about mindfulness techniques. Individual experiences may vary.",
+    "links": [
+        {"url": "/privacy", "text": "Privacy"},
+        {"url": "/terms", "text": "Terms"}
+    ]
 }
